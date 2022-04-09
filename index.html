@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Experiment 6</title>
+    <style>
+    *{
+    padding: 5px;
+    margin: 10px;
+    align-items: center;
+    text-align: center;
+    font-family: sans-serif;
+    color: rgb(14, 10, 10);
+    }
+  .border1 {
+    border: solid 2px rgb(85, 43, 43);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 100%;
+    margin-top: 100px;
+    margin-bottom: auto;
+    border: 3px solid black;
+    padding: 10px;
+    box-shadow: 1px 1px 10px maroon;
+    background-color: grey;
+  }
+
+</style>
+   
+</head>
+
+<body>
+    <div class="container">
+        <div class="border1">
+            <h1>Digital Clock</h1>
+            <span id="clock">00:00:00</span>
+
+        </div>
+
+        <script>
+
+            setInterval(showTime, 1000);
+            function showTime() {
+                let time = new Date();
+                let hour = time.getHours();
+                let min = time.getMinutes();
+                let sec = time.getSeconds();
+                am_pm = "AM";
+
+                if (hour > 12) {
+                    hour -= 12;
+                    am_pm = "PM";
+                }
+                if (hour == 0) {
+                    hr = 12;
+                    am_pm = "AM";
+                }
+
+                hour = hour < 10 ? "0" + hour : hour;
+                min = min < 10 ? "0" + min : min;
+                sec = sec < 10 ? "0" + sec : sec;
+
+                let currentTime = hour + ":"
+                    + min + ":" + sec + am_pm;
+
+                document.getElementById("clock")
+                    .innerHTML = currentTime;
+            }
+            showTime();
+        </script>
+
+        <br>
+
+`           <div class="change_bg border1">
+            <h1>Background color change</h1>
+
+        </div>
+
+        <script>
+            setInterval(changebg, 1000);
+            function changebg() {
+                var red = Math.floor(Math.random() * 255);
+                var blue = Math.floor(Math.random() * 255);
+                var green = Math.floor(Math.random() * 255);
+                var color = "rgb(" + red + "," + green + "," + blue + ")";
+                document.getElementsByClassName("change_bg")[0].style = "background-color:" + color;
+            }
+            changebg();
+        </script>
+
+        
+        <br>
+
+
+        <div class="para1 border1" onmouseover="incsize(this,'30px')" onmouseout="decsize(this,'20px')">
+            Hover on this text to increase the font size!
+        </div>
+
+
+
+
+        <script>
+            function incsize(elem, siz) {
+                elem.style.fontSize = siz;
+            }
+
+            function decsize(elem, siz) {
+                elem.style.fontSize = siz;
+            }
+        </script>
+
+    
+        <br>
+        <div class="border1">
+        <div id="img"><img src="xcar.jpg" height="100px"></div>
+
+        <button onclick="moveRight()">Right</button>
+        <button onclick="moveLeft()">Left</button>
+        <button onclick="stop()">Stop</button>
+
+    </div>
+
+        <script>
+
+
+            imgObj = document.getElementById('img');
+            imgObj.style.position = 'relative';
+            imgObj.style.left = '0px';
+
+            function moveRight() {
+                imgObj.style.left = parseInt(imgObj.style.left) + 1 + 'px';
+                animate = setTimeout('moveRight()', 10);
+            }
+            function moveLeft() {
+                imgObj.style.left = parseInt(imgObj.style.left) - 1 + 'px';
+                animate = setTimeout('moveLeft()', 10);
+            }
+            function stop() {
+                clearTimeout(animate);
+                imgObj.style.left = '0px';
+                
+            }
+
+        </script>
+        
+        <br>
+        <div class="border1" id="studentdata"></div>
+        <script>
+
+            function datab() {
+
+                let student = [
+                    { name: 'Rohan', r_num: '123', dob: '20-apr-1995' },
+                    { name: 'Jacob', r_num: '234', dob: '05-jan-1998' },
+                    { name: 'Simon', r_num: '456', dob: '20-jun-2021' }
+                ];
+                var str = "";
+                var age;
+                for (var i = 0; i < student.length; i++) {
+                    age = parseInt(student[i].dob.substring(7, 11));
+                    console.log(age);
+                    if (age > 2000)
+                        str = str + student[i].name + "'s register number is " + student[i].r_num + ". DOB comes after 2000. <br>";
+                    else
+                        str = str + student[i].name + "'s register number is " + student[i].r_num + ". DOB comes before 2000. <br>";
+
+                }
+                document.getElementById("studentdata").innerHTML = str + "<br>";
+            }
+            window.onload = datab();
+        </script>
+    </div>
+
+</body>
+
+</html>
